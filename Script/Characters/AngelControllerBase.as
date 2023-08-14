@@ -1,4 +1,4 @@
-class AAngelCharacterControllerBase : APlayerController
+class AAngelControllerBase : APlayerController
 {
   UPROPERTY(Category = "Input")
   UInputAction Action;
