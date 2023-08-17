@@ -8,10 +8,15 @@ class AAngelCharacterBase : ACharacter
     // Set default values for subobjects with `default` statements
     // No need and no function of CreatedefaultSubObject
     
+    UPROPERTY(DefaultComponent, EditAnywhere, Category = "Weapon", DisplayName = "Projectile Weapon Mesh", Attach = CharacterMesh0, AttachSocket = "WeaponHandSocket")
+    USkeletalMeshComponent ProjectileWeaponMeshComponent;
+
     UFUNCTION(BlueprintOverride)
     void ConstructionScript()
     {
         WeaponMeshComponent.SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        ProjectileWeaponMeshComponent.SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
     }
 
     UFUNCTION(BlueprintOverride)
