@@ -3,8 +3,8 @@
 
 class AAngelCharacterBase : ACharacter
 {
-    UPROPERTY(DefaultComponent, EditAnywhere, Category = "Weapon", DisplayName = "Weapon Mesh", Attach = CharacterMesh0, AttachSocket = FName("WeaponHandSocket"))
-    USkeletalMeshComponent WeaponMeshComponent;
+    UPROPERTY(DefaultComponent, EditAnywhere, Category = "Weapon", DisplayName = "Weapon Mesh", Attach = CharacterMesh0, AttachSocket = "WeaponHandSocket")
+    UStaticMeshComponent WeaponMeshComponent;
     // Set default values for subobjects with `default` statements
     // No need and no function of CreatedefaultSubObject
     
