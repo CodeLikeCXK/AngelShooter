@@ -23,7 +23,7 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
         const FRotator Rotation = ControlRotation;
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
         const FVector Direction = YawRotation.ForwardVector;
-        AddMovementInput(Direction, AxisValue);
+        AddMovementInput(Direction, AxisValue , false);
     }
 
     UFUNCTION()
@@ -33,7 +33,7 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
         const FRotator Rotation = ControlRotation;
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
         const FVector Direction = YawRotation.RightVector;
-        AddMovementInput(Direction, AxisValue);
+        AddMovementInput(Direction, AxisValue, false);
     }
 
 
