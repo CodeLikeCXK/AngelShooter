@@ -6,6 +6,15 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
     // set our turn rates for input
 	float BaseTurnRate = 45.f;
 
+
+    UPROPERTY(DefaultComponent, EditAnywhere, Category = "Camera", Attach = CollisionCylinder)
+    USpringArmComponent CameraBoom;
+    // Set default values for subobjects with `default` statements
+    // No need and no function of CreatedefaultSubObject
+    
+    UPROPERTY(DefaultComponent, EditAnywhere, Category = "Camera", Attach = CameraBoom)
+    UCameraComponent Camera;
+
     UFUNCTION(BlueprintOverride)
     void BeginPlay()
     {
@@ -13,6 +22,7 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
         //  Note that these bindings consume the input and override any InputAxis nodes in the blueprint
         ScriptInputComponent.BindAxis(n"MoveForward", FInputAxisHandlerDynamicSignature(this, n"OnMoveForwardAxisChanged"));
         ScriptInputComponent.BindAxis(n"MoveRight", FInputAxisHandlerDynamicSignature(this, n"OnMoveRightAxisChanged"));
+        
 
     }
 
@@ -21,7 +31,7 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
     {
         Print("Move Forward Axis Value: "+AxisValue, Duration=0.0);
         const FRotator Rotation = ControlRotation;
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		const FRotator YawRotation(0, Rotation.Yaw + CameraBoom.RelativeRotation.Yaw, 0);
         const FVector Direction = YawRotation.ForwardVector;
         AddMovementInput(Direction, AxisValue , false);
     }
@@ -31,7 +41,7 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
     {
         Print("Move Right Axis Value: "+AxisValue, Duration=0.0);
         const FRotator Rotation = ControlRotation;
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		const FRotator YawRotation(0, Rotation.Yaw + CameraBoom.RelativeRotation.Yaw, 0);
         const FVector Direction = YawRotation.RightVector;
         AddMovementInput(Direction, AxisValue, false);
     }
