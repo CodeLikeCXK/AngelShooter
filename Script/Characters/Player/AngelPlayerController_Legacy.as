@@ -3,10 +3,15 @@ class AAngelPlayerControllerLegacy : APlayerController
   IEnemyInterface LastActor;
   IEnemyInterface ThisActor;
 
+  UInputComponent InputComponent;
+
+
 
   UFUNCTION(BlueprintOverride)
   void BeginPlay()
   {
+    InputComponent = UInputComponent::Get(this);
+    PushInputComponent(InputComponent);
       //setup input   
      bShowMouseCursor = true;
      EMouseCursor DefaultMouseCursor = EMouseCursor::Default;  
@@ -40,6 +45,25 @@ class AAngelPlayerControllerLegacy : APlayerController
         else
         {
           
+        }
+      }
+      else
+      {
+        if(ThisActor == nullptr)
+        {
+          LastActor.UnHighLightActor();
+        }
+        else
+        {
+          if(LastActor != ThisActor)
+          {
+            LastActor.UnHighLightActor();
+            ThisActor.HighLightActor();
+          }
+          else
+          {
+            
+          }
         }
       }
 

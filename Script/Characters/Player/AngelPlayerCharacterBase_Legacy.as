@@ -1,4 +1,4 @@
-class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
+class AAngelPlayerCharacterBaseLegacy : AAngelCharacterBase
 {
     UPROPERTY(DefaultComponent)
     UInputComponent ScriptInputComponent;
@@ -26,14 +26,12 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
 
     }
 
-
-
     UFUNCTION()
     void OnMoveForwardAxisChanged(float32 AxisValue)
     {
         Print("Move Forward Axis Value: "+AxisValue, Duration=0.0);
         const FRotator Rotation = ControlRotation;
-		const FRotator YawRotation(0, CameraBoom.RelativeRotation.Yaw, 0);
+		const FRotator YawRotation(CameraBoom.RelativeRotation.Pitch, CameraBoom.RelativeRotation.Yaw, 0);
         const FVector Direction = YawRotation.ForwardVector;
         AddMovementInput(Direction, AxisValue , false);
     }
@@ -43,8 +41,8 @@ class AAngelPlayerChracterBaseLegacy : AAngelCharacterBase
     {
         Print("Move Right Axis Value: "+AxisValue, Duration=0.0);
         const FRotator Rotation = ControlRotation;
-		const FRotator YawRotation(0, Rotation.Yaw + CameraBoom.RelativeRotation.Yaw, 0);
-        const FVector Direction = YawRotation.RightVector - CameraBoom.RelativeRotation.Pitch;
+		const FRotator YawRotation(0, CameraBoom.RelativeRotation.Yaw, 0);
+        const FVector Direction = YawRotation.RightVector;
         AddMovementInput(Direction, AxisValue, false);
     }
 
