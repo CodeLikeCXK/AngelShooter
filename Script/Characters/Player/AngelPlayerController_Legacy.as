@@ -1,20 +1,27 @@
 class AAngelPlayerControllerLegacy : APlayerController
 {
-  IEnemyInterface LastActor;
-  IEnemyInterface ThisActor;
+  AActor LastActor;
+  AActor ThisActor;
 
+  UPROPERTY(DefaultComponent)
   UInputComponent InputComponent;
+  default bShowMouseCursor = true;
+  default DefaultMouseCursor = EMouseCursor::Default;  
 
 
 
   UFUNCTION(BlueprintOverride)
+  void ConstructionScript()
+  {
+    //InputComponent = UInputComponent::Get(this);
+    //PushInputComponent(InputComponent);
+      //setup input   
+  } 
+
+  UFUNCTION(BlueprintOverride)
   void BeginPlay()
   {
-    InputComponent = UInputComponent::Get(this);
-    PushInputComponent(InputComponent);
-      //setup input   
-     bShowMouseCursor = true;
-     EMouseCursor DefaultMouseCursor = EMouseCursor::Default;  
+
   }
 
   UFUNCTION(BlueprintOverride)
@@ -29,18 +36,20 @@ class AAngelPlayerControllerLegacy : APlayerController
       FHitResult CursorHit;
       GetHitResultUnderCursorByChannel(ETraceTypeQuery::Visibility, false, CursorHit);
       if(CursorHit.bBlockingHit) return;
-
       LastActor = ThisActor;
-      ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
-
+      ThisActor = CursorHit.GetActor();
+      UAngelEnemyComponent AngelEnemyComponent;
+      UAngelEnemyComponent ThisEnemyComponent =  Cast<UAngelEnemyComponent>(ThisActor.GetComponentByClass(AngelEnemyComponent));
+      UAngelEnemyComponent LastEnemyComponent =  Cast<UAngelEnemyComponent>(ThisActor.GetComponentByClass(AngelEnemyComponent));
 
       //line trance from cursor
 
       if(LastActor == nullptr)
       {
-        if (ThisActor != nullptr)
+        if (ThisActor != nullptr && ThisEnemyComponent != nullptr)
         {
-          ThisActor.HighLightActor();
+          Print("Hello world");
+          ThisEnemyComponent.HighLightActor();
         }
         else
         {
@@ -49,16 +58,16 @@ class AAngelPlayerControllerLegacy : APlayerController
       }
       else
       {
-        if(ThisActor == nullptr)
+        if(ThisActor == nullptr && LastEnemyComponent != nullptr)
         {
-          LastActor.UnHighLightActor();
+          LastEnemyComponent.UnHighLightActor();
         }
         else
         {
           if(LastActor != ThisActor)
           {
-            LastActor.UnHighLightActor();
-            ThisActor.HighLightActor();
+           LastEnemyComponent.UnHighLightActor();
+           ThisEnemyComponent.HighLightActor();
           }
           else
           {

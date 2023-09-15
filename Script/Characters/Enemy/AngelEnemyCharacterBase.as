@@ -1,7 +1,8 @@
 class AAngelEnemyChracterBase : AAngelCharacterBase
 {
-    UPROPERTY(BlueprintReadOnly)
-    bool bHighLighted = false;
+    UPROPERTY(DefaultComponent)
+    UAngelEnemyComponent AngelEnemyComponent;
+    default AngelEnemyComponent.bHighLighted = false;
 
     UFUNCTION(BlueprintOverride)
     void BeginPlay()
@@ -9,16 +10,16 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
         
     }
 
-    UFUNCTION(BlueprintOverride)
+    UFUNCTION()
     void HighLightActor()
     {
-        bHighLighted = true;
+         AngelEnemyComponent.bHighLighted = true;
     }
 
-    UFUNCTION(BlueprintOverride)
+    UFUNCTION()
     void UnHighLightActor()
     {
-        bHighLighted = false;
+         AngelEnemyComponent.bHighLighted = false;
     }
 
 

@@ -25,20 +25,5 @@ class AAngelCharacterBase : ACharacter
         
     }
 
-    UFUNCTION(BlueprintEvent)
-    void HighLightActor()
-    {
-
-    }
-
-    UFUNCTION(BlueprintEvent)
-    void UnHighLightActor()
-    {
-
-    }
-
-
-
-
 
 }
