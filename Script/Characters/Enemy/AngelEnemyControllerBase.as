@@ -11,10 +11,8 @@ class AAngelEnemyControllerBase : AAIController
     UFUNCTION(BlueprintOverride)
     void BeginPlay()
     {
-        Print("Start");
         NavArea = UNavigationSystemV1::GetNavigationSystem();
         RandomPatrol();
-        this.ReceiveMoveCompleted.AddUFunction(this,n"OnAIMoveCompleted");
     }
     
     UFUNCTION(BlueprintOverride)
@@ -26,7 +24,7 @@ class AAngelEnemyControllerBase : AAIController
     void RandomPatrol()
     {
         UpdateRandomPatrolPoint();
-        Print("PatrolStart");
+//        Print("PatrolStart");
         TargetLocation = RandomLocation;
         MoveToLocation(TargetLocation);       
     }
@@ -37,11 +35,6 @@ class AAngelEnemyControllerBase : AAIController
         UNavigationSystemV1::GetRandomReachablePointInRadius(GetControlledPawn().GetActorLocation(),RandomLocation, 15000.0f);
     }
 
-    UFUNCTION()
-    void OnAIMoveCompleted(FAIRequestID RequestID, EPathFollowingResult Result)
-    {
-      Print("Reach!");
-      RandomPatrol();
-    }
+
 
 }
