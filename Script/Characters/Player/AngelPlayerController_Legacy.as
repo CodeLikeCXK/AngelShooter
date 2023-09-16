@@ -10,6 +10,8 @@ class AAngelPlayerControllerLegacy : APlayerController
 
 
 
+
+
   UFUNCTION(BlueprintOverride)
   void ConstructionScript()
   {
@@ -39,42 +41,42 @@ class AAngelPlayerControllerLegacy : APlayerController
       LastActor = ThisActor;
       ThisActor = CursorHit.GetActor();
       UAngelEnemyComponent AngelEnemyComponent;
-      UAngelEnemyComponent ThisEnemyComponent =  Cast<UAngelEnemyComponent>(ThisActor.GetComponentByClass(AngelEnemyComponent));
-      UAngelEnemyComponent LastEnemyComponent =  Cast<UAngelEnemyComponent>(ThisActor.GetComponentByClass(AngelEnemyComponent));
+      //UAngelEnemyComponent ThisEnemyComponent =  Cast<UAngelEnemyComponent>(ThisActor.GetComponentByClass(AngelEnemyComponent));
+     // UAngelEnemyComponent LastEnemyComponent =  Cast<UAngelEnemyComponent>(ThisActor.GetComponentByClass(AngelEnemyComponent));
 
       //line trance from cursor
 
-      if(LastActor == nullptr)
-      {
-        if (ThisActor != nullptr && ThisEnemyComponent != nullptr)
-        {
-          Print("Hello world");
-          ThisEnemyComponent.HighLightActor();
-        }
-        else
-        {
+      //if(LastActor == nullptr)
+      //{
+       // if (ThisActor != nullptr && ThisEnemyComponent != nullptr)
+        //{
+          //Print("Hello world");
+          //ThisEnemyComponent.HighLightActor();
+        //}
+        //else
+        //{
           
-        }
-      }
-      else
-      {
-        if(ThisActor == nullptr && LastEnemyComponent != nullptr)
-        {
-          LastEnemyComponent.UnHighLightActor();
-        }
-        else
-        {
-          if(LastActor != ThisActor)
-          {
-           LastEnemyComponent.UnHighLightActor();
-           ThisEnemyComponent.HighLightActor();
-          }
-          else
-          {
+        //}
+      //}
+      //else
+      //{
+        //if(ThisActor == nullptr && LastEnemyComponent != nullptr)
+        //{
+          //LastEnemyComponent.UnHighLightActor();
+        //}
+        //else
+        //{
+          //if(LastActor != ThisActor)
+          //{
+           //LastEnemyComponent.UnHighLightActor();
+           //ThisEnemyComponent.HighLightActor();
+          //}
+          //else
+          //{
             
-          }
-        }
-      }
+          //}
+        //}
+      //}
 
 
   }

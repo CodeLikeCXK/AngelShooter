@@ -3,6 +3,10 @@
 
 class AAngelCharacterBase : ACharacter
 {
+        // Explicit root component
+   // UPROPERTY(DefaultComponent, RootComponent)
+    //USceneComponent SceneRoot;
+    
     UPROPERTY(DefaultComponent, EditAnywhere, Category = "Weapon", DisplayName = "Weapon Mesh", Attach = CharacterMesh0, AttachSocket = "WeaponHandSocket")
     UStaticMeshComponent WeaponMeshComponent;
     // Set default values for subobjects with `default` statements
