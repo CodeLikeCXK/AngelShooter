@@ -14,6 +14,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
 
     UPROPERTY(DefaultComponent, EditAnywhere, Category = "Enemy")
     USphereComponent PlayerCollisionDetection;
+    default PlayerCollisionDetection.SphereRadius = 800.f;
 
     UPROPERTY(DefaultComponent, EditAnywhere, Category = "Enemy")
     USphereComponent PlayerAttackCollisionDetection;
