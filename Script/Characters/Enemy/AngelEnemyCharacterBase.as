@@ -8,8 +8,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
     UPROPERTY(BlueprintReadWrite)
     bool CanDealDamage;
 
-    bool PlayerDetected;
-    bool CanAttackPlayer; 
+
     APawn player;
     
 
@@ -24,11 +23,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
 
     AAngelEnemyControllerBase AngelEnemyController;
 
-    UPROPERTY(EditAnywhere)
-	float StoppingDistance = 100.0f;
 
-    UPROPERTY(EditAnywhere)
-	float AttackRange = 10.0f;
 
     FTimerHandle SeekPlayerTimerHandle;
 
@@ -46,7 +41,6 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
         PlayerAttackCollisionDetection.OnComponentEndOverlap.AddUFunction(this,n"OnPlayerAttackOverlapEnd");
         DamageDetection.OnComponentBeginOverlap.AddUFunction(this,n"OnDealDamageOverlapBegin");
 
-        AngelEnemyController.ReceiveMoveCompleted.AddUFunction(this,n"OnAIMoveCompleted");
 
 
     }
@@ -57,24 +51,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
 
     }
 
-    UFUNCTION()
-    void MoveToPlayer()
-    {
-        AngelEnemyController.MoveToLocation(player.GetActorLocation(), StoppingDistance, true);
-    }
 
-    UFUNCTION()
-    void SeekPlayer()
-    {
-        MoveToPlayer();
-        System::SetTimer(this,n"SeekPlayer",0.25f,true);
-    }    
-
-    UFUNCTION()
-    void StopSeekingPlayer()
-    {
-        System::ClearTimer(this,"SeekPlayer");
-    }
     
 
     UFUNCTION()
@@ -83,9 +60,9 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
         PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if(PlayerRef != nullptr)
         {
-            PlayerDetected = true;
+            AngelEnemyController.PlayerDetected = true;
             Print("PlayerDetected");
-		    SeekPlayer();
+		    AngelEnemyController.SeekPlayer();
         }
 
     }
@@ -96,8 +73,8 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
         PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if(PlayerRef != nullptr)
         {
-            PlayerDetected = false;
-		    StopSeekingPlayer();
+            AngelEnemyController.PlayerDetected = false;
+		    AngelEnemyController.StopSeekingPlayer();
             AngelEnemyController.RandomPatrol();
         }
 
@@ -109,7 +86,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
         PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if (PlayerRef != nullptr)
         {
-            CanAttackPlayer = true;
+            AngelEnemyController.CanAttackPlayer = true;
         }
     }
 
@@ -119,8 +96,8 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
         PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if (PlayerRef != nullptr)
         {
-            CanAttackPlayer = false;
-            SeekPlayer();
+            AngelEnemyController.CanAttackPlayer = false;
+            AngelEnemyController.SeekPlayer();
         }
     }
 
@@ -135,20 +112,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
         }
     }
 
-    UFUNCTION()
-    void OnAIMoveCompleted(FAIRequestID RequestID, EPathFollowingResult Result)
-    {
-      //   Print("Reach!");
-      if(!PlayerDetected)
-      {
-        AngelEnemyController.RandomPatrol();
-      }
-      else if (PlayerDetected && CanAttackPlayer)
-      {
-        StopSeekingPlayer();
-        AngelEnemyController.MoveToLocation(player.GetActorLocation(), AttackRange, true);
-      }
-    }
+
 
 
 
