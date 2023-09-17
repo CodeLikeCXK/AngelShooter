@@ -1,4 +1,4 @@
-class AAngelPlayerChracterBase : AAngelCharacterBase
+class AAngelPlayerCharacterBase : AAngelCharacterBase
 {
     UFUNCTION(BlueprintOverride)
     void BeginPlay()
