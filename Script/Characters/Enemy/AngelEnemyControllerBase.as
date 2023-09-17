@@ -7,6 +7,9 @@ class AAngelEnemyControllerBase : AAIController
 
     UAITask_MoveTo EnemyTask_MoveTo;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UBehaviorTree BehaviorTree;
+
 
     UFUNCTION(BlueprintOverride)
     void BeginPlay()

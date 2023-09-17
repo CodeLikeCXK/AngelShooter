@@ -1,6 +1,6 @@
 class AAngelEnemyChracterBase : AAngelCharacterBase
 {
-    AAngelEnemyChracterBase PlayerRef;
+    AAngelPlayerCharacterBaseLegacy PlayerRef;
     UPROPERTY(DefaultComponent)
     UAngelEnemyComponent AngelEnemyComponent;
     default AngelEnemyComponent.bHighLighted = false;
@@ -80,7 +80,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
     UFUNCTION()
 	void OnPlayerDetectedOverlapBegin(UPrimitiveComponent OverlappedComp,AActor OtherActor, UPrimitiveComponent OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult&in SweepResult)
     {
-        PlayerRef = Cast<AAngelEnemyChracterBase>(OtherActor);
+        PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if(PlayerRef != nullptr)
         {
             PlayerDetected = true;
@@ -93,7 +93,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
     UFUNCTION()
 	void OnPlayerDetectedOverlapEnd(UPrimitiveComponent OverlappedComp, AActor OtherActor, UPrimitiveComponent OtherComp, int32 OtherBodyIndex)
     {
-        PlayerRef = Cast<AAngelEnemyChracterBase>(OtherActor);
+        PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if(PlayerRef != nullptr)
         {
             PlayerDetected = false;
@@ -106,7 +106,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
     UFUNCTION()
 	void OnPlayerAttackOverlapBegin(UPrimitiveComponent OverlappedComp, AActor OtherActor,  UPrimitiveComponent OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult&in SweepResult)
     {
-        PlayerRef = Cast<AAngelEnemyChracterBase>(OtherActor);
+        PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if (PlayerRef != nullptr)
         {
             CanAttackPlayer = true;
@@ -116,7 +116,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
     UFUNCTION()
 	void OnPlayerAttackOverlapEnd(UPrimitiveComponent OverlappedComp, AActor OtherActor,  UPrimitiveComponent OtherComp, int32 OtherBodyIndex)
     {
-        PlayerRef = Cast<AAngelEnemyChracterBase>(OtherActor);
+        PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if (PlayerRef != nullptr)
         {
             CanAttackPlayer = false;
@@ -127,7 +127,7 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
     UFUNCTION()
 	void OnDealDamageOverlapBegin(UPrimitiveComponent OverlappedComp, AActor OtherActor,  UPrimitiveComponent OtherComp,int32 OtherBodyIndex, bool bFromSweep, const FHitResult&in SweepResult)
     {
-        PlayerRef = Cast<AAngelEnemyChracterBase>(OtherActor);
+        PlayerRef = Cast<AAngelPlayerCharacterBaseLegacy>(OtherActor);
         if (PlayerRef != nullptr && CanDealDamage)
         {
 		// deal damage to player
