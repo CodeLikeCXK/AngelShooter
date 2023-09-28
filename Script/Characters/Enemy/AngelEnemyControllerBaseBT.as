@@ -3,7 +3,7 @@ class AAngelEnemyControllerBaseBT : AAIController
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBehaviorTree BehaviorTree;
 
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(DefaultComponent,EditAnywhere)
     UPawnSensingComponent PawnSensingComp;
 
     UFUNCTION(BlueprintOverride)
@@ -45,6 +45,7 @@ class AAngelEnemyControllerBaseBT : AAIController
     void RunRetriggerableTimer()
     {
         System::ClearTimer(this,"RunRetriggerableTimer");
+        
 
     }
 }
