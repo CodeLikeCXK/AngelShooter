@@ -24,9 +24,9 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
 
     AAngelEnemyControllerBase AngelEnemyController;
 
-
-
     FTimerHandle SeekPlayerTimerHandle;
+
+    default bUseControllerRotationYaw = true;
 
 
     UFUNCTION(BlueprintOverride)

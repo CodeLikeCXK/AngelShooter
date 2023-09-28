@@ -6,11 +6,18 @@ class AAngelEnemyControllerBaseBT : AAIController
     UPROPERTY(DefaultComponent,EditAnywhere)
     UPawnSensingComponent PawnSensingComp;
 
+    UPROPERTY(DefaultComponent,EditAnywhere)
+    UAIPerceptionComponent PerceptionComp;
+    
+
     UFUNCTION(BlueprintOverride)
     void BeginPlay()
     {
         RunBehaviorTree(BehaviorTree);
         PawnSensingComp.OnSeePawn.AddUFunction(this,n"OnSeePawn");
+        PawnSensingComp.OnHearNoise.AddUFunction(this,n"OnHearNoise");
+
+        
     }
 
     UFUNCTION()
@@ -45,7 +52,12 @@ class AAngelEnemyControllerBaseBT : AAIController
     void RunRetriggerableTimer()
     {
         System::ClearTimer(this,"RunRetriggerableTimer");
-        
+
+    }
+
+    UFUNCTION()
+    void OnHearNoise(APawn Player, FVector&in Location, float32 Volume)
+    {
 
     }
 }
