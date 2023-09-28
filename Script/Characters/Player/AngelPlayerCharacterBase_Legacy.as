@@ -15,6 +15,8 @@ class AAngelPlayerCharacterBaseLegacy : AAngelCharacterBase
     UPROPERTY(DefaultComponent, EditAnywhere, Category = "Camera", Attach = CameraBoom)
     UCameraComponent Camera;
 
+    
+
     UFUNCTION(BlueprintOverride)
     void BeginPlay()
     {

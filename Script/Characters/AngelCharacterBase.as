@@ -15,6 +15,20 @@ class AAngelCharacterBase : ACharacter
     UPROPERTY(DefaultComponent, EditAnywhere, Category = "Weapon", DisplayName = "Projectile Weapon Mesh", Attach = CharacterMesh0, AttachSocket = "WeaponHandSocket")
     USkeletalMeshComponent ProjectileWeaponMeshComponent;
 
+    UPROPERTY(DefaultComponent,VisibleAnywhere,BlueprintReadWrite)
+    UPawnNoiseEmitterComponent PawnNoiseEmitterComp;
+
+    UFUNCTION(BlueprintCallable, Category = AI)
+    void ReportNoise(USoundBase SoundToPlay, float Volume)
+    {
+        if(SoundToPlay != nullptr)
+        {
+            Gameplay::PlaySoundAtLocation(SoundToPlay,GetActorLocation(),GetActorRotation(),Volume);
+            MakeNoise(Volume,this,GetActorLocation());
+        }
+    }
+
+
     UFUNCTION(BlueprintOverride)
     void ConstructionScript()
     {
