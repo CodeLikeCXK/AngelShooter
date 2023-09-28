@@ -3,11 +3,17 @@ class AAngelEnemyControllerBaseBT : AAIController
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBehaviorTree BehaviorTree;
 
+
     UPROPERTY(DefaultComponent,EditAnywhere)
     UPawnSensingComponent PawnSensingComp;
 
     UPROPERTY(DefaultComponent,EditAnywhere)
     UAIPerceptionComponent PerceptionComp;
+
+    UPROPERTY(EditDefaultsOnly)
+	FName TargetKey = n"SensedPawn";
+
+
     
 
     UFUNCTION(BlueprintOverride)
@@ -56,8 +62,20 @@ class AAngelEnemyControllerBaseBT : AAIController
     }
 
     UFUNCTION()
-    void OnHearNoise(APawn Player, FVector&in Location, float32 Volume)
+    void SetSensedTarget(APawn NewTarget)
     {
-
+        AIBlueprintHelper::GetBlackboard(this).SetValueAsObject(TargetKey,NewTarget);
     }
+
+    UFUNCTION()
+    void OnHearNoise(APawn PawnInstigator, FVector&in Location, float32 Volume)
+    {
+        if(PawnInstigator != GetControlledPawn())
+        {
+            SetSensedTarget(PawnInstigator);
+            Print("Noise Heard");
+        }
+    }
+
+
 }
