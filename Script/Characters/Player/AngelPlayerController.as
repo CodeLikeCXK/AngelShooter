@@ -12,6 +12,8 @@ class AAngelPlayerControllerBase : APlayerController
   UPROPERTY(DefaultComponent)
   UEnhancedInputComponent InputComponent;
 
+  USpringArmComponent PlayerCameraBoom;
+
 
 
   UFUNCTION(BlueprintOverride)
@@ -19,6 +21,7 @@ class AAngelPlayerControllerBase : APlayerController
   {
       //setup input   
       SetupInputComponent();
+      PlayerCameraBoom = Cast<USpringArmComponent>(ControlledPawn.GetComponentByClass(USpringArmComponent::StaticClass()));
   }
 
   UFUNCTION()
@@ -37,20 +40,20 @@ class AAngelPlayerControllerBase : APlayerController
 
   }
 
-//enhanced input method not ready for 5.11
 //
  UFUNCTION()
 void Move(const FInputActionValue& InputActionValue,float32 ElapsedTime,float32 TriggeredTime,UInputAction SourceAction)
   {
-    //const FVector2D InputAxisVector = Math::RoundToFloat(InputActionValue);
-    //const FRotator Rotation = GetControlRotation();
-    //const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
+    FVector2D MovementVector = InputActionValue.GetAxis2D();
+    const FRotator Rotation = GetControlRotation();
+    const FRotator YawRotationForward(PlayerCameraBoom.RelativeRotation.Pitch, PlayerCameraBoom.RelativeRotation.Yaw, 0);
+    const FRotator YawRotationRight(0, PlayerCameraBoom.RelativeRotation.Yaw, 0);
 
-    //const FVector ForwardDirection = ControlRotation.ForwardVector;
-    //const FVector RightdDirection = ControlRotation.RightVector;
+    const FVector ForwardDirection = YawRotationForward.ForwardVector;
+    const FVector RightdDirection = YawRotationRight.RightVector;
 
-    //ControlledPawn.AddMovementInput(ForwardDirection, InputAxisVector.Y);
-    //ControlledPawn.AddMovementInput(RightdDirection, InputAxisVector.X);
+    ControlledPawn.AddMovementInput(ForwardDirection, MovementVector.Y);
+    ControlledPawn.AddMovementInput(RightdDirection, MovementVector.X);
   }
 
 
