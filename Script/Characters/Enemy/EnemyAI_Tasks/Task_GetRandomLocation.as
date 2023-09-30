@@ -22,7 +22,7 @@ class Task_GetRandomLocation: UBTTask_BlueprintBase
 
         }
 
-        AIBlueprintHelper::GetBlackboard(OwnerController).SetValueAsVector(FName("Random Patrol Location"), RandomPatrolLocation);
+        AIHelper::GetBlackboard(OwnerController).SetValueAsVector(FName("Random Patrol Location"), RandomPatrolLocation);
         EBTNodeResult::Succeeded;
         FinishExecute(true); 
     }

@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../../../../../UE_5.1/Engine/Source/Runtime/AIModule/Classes/Navigation/PathFollowingComponent.h"
-#include "../../../../../UE_5.1/Engine/Source/Runtime/AIModule/Classes/AITypes.h"
+#include "../../../../../UE_5.3/Engine/Source/Runtime/AIModule/Classes/Navigation/PathFollowingComponent.h"
+#include "../../../../../UE_5.3/Engine/Source/Runtime/AIModule/Classes/AITypes.h"
 #include "UObject/NoExportTypes.h"
 #include "AIMixinLibrary.generated.h"
 
@@ -16,7 +16,6 @@ class UAIMixinLibrary : public UObject
 {
 	GENERATED_BODY()
 
-public:
 
 	
 };

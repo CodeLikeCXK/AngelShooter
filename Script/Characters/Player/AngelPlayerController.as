@@ -24,7 +24,7 @@ class AAngelPlayerControllerBase : APlayerController
   UFUNCTION()
   void SetupInputComponent()
   {
-    //setup input action    //enhanced input system is not ready for 5.1.1
+    //setup input action    
     InputComponent = UEnhancedInputComponent::Get(this);
     PushInputComponent(InputComponent);
     UEnhancedInputLocalPlayerSubsystem Subsystem = UEnhancedInputLocalPlayerSubsystem::Get(this);
@@ -32,15 +32,15 @@ class AAngelPlayerControllerBase : APlayerController
     bShowMouseCursor = true;
     EMouseCursor DefaultMouseCursor = EMouseCursor::Default;  
 
-    //setup input action    //enhanced input system is not ready for 5.1.1
-    InputComponent.BindAction(MoveAction, ETriggerEvent::Triggered, this, n"Move");
+    //setup input action    
+    InputComponent.BindAction(MoveAction, ETriggerEvent::Triggered, FEnhancedInputActionHandlerDynamicSignature(this,n"Move"));
 
   }
 
 //enhanced input method not ready for 5.11
 //
  UFUNCTION()
-void Move(const FInputActionValue& InputActionValue)
+void Move(const FInputActionValue& InputActionValue,float32 ElapsedTime,float32 TriggeredTime,UInputAction SourceAction)
   {
     //const FVector2D InputAxisVector = Math::RoundToFloat(InputActionValue);
     //const FRotator Rotation = GetControlRotation();

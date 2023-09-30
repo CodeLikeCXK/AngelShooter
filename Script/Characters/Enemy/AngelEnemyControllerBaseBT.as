@@ -42,12 +42,12 @@ class AAngelEnemyControllerBaseBT : AAIController
     {
         if(SeePlayer)
         {
-            AIBlueprintHelper::GetBlackboard(this).SetValueAsBool(FName("Can See Player"), SeePlayer);
-            AIBlueprintHelper::GetBlackboard(this).SetValueAsObject(FName("Player Target"), Player);
+            AIHelper::GetBlackboard(this).SetValueAsBool(FName("Can See Player"), SeePlayer);
+            AIHelper::GetBlackboard(this).SetValueAsObject(FName("Player Target"), Player);
         }
         else
         {
-            AIBlueprintHelper::GetBlackboard(this).SetValueAsBool(FName("Can See Player"), SeePlayer);
+            AIHelper::GetBlackboard(this).SetValueAsBool(FName("Can See Player"), SeePlayer);
             ACharacter EnemyChar = Cast<ACharacter>(GetControlledPawn());
         }
     }
@@ -64,11 +64,11 @@ class AAngelEnemyControllerBaseBT : AAIController
     UFUNCTION()
     void SetSensedTarget(APawn NewTarget)
     {
-        AIBlueprintHelper::GetBlackboard(this).SetValueAsObject(TargetKey,NewTarget);
+        AIHelper::GetBlackboard(this).SetValueAsObject(TargetKey,NewTarget);
     }
 
     UFUNCTION()
-    void OnHearNoise(APawn PawnInstigator, FVector&in Location, float32 Volume)
+    void OnHearNoise(APawn PawnInstigator, const FVector&in Location, float32 Volume)
     {
         if(PawnInstigator != GetControlledPawn())
         {
