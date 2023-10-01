@@ -10,6 +10,9 @@ class AAngelEnemyChracterBase : AAngelCharacterBase
 
 
     APawn player;
+
+    default bUseControllerRotationYaw = true;
+
     
 
     UPROPERTY(DefaultComponent, EditAnywhere, Category = "Enemy")
