@@ -3,7 +3,6 @@ class AAngelEnemyControllerBaseBT : AAIController
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBehaviorTree BehaviorTree;
 
-
     UPROPERTY(DefaultComponent,EditAnywhere)
     UPawnSensingComponent PawnSensingComp;
 
@@ -12,6 +11,13 @@ class AAngelEnemyControllerBaseBT : AAIController
 
     UPROPERTY(EditDefaultsOnly)
 	FName TargetKey = n"SensedPawn";
+
+    
+	//UAISenseConfig_Sight AIsightConfig;
+    //default AIsightConfig.AddToRoot();
+    //default PerceptionComp.SensesConfig.Add(AIsightConfig);
+
+     
 
 
     
@@ -22,6 +28,7 @@ class AAngelEnemyControllerBaseBT : AAIController
         RunBehaviorTree(BehaviorTree);
         PawnSensingComp.OnSeePawn.AddUFunction(this,n"OnSeePawn");
         PawnSensingComp.OnHearNoise.AddUFunction(this,n"OnHearNoise");
+
 
         
     }
