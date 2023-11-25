@@ -33,7 +33,7 @@ class AAngelPlayerControllerBase : APlayerController
     UEnhancedInputLocalPlayerSubsystem Subsystem = UEnhancedInputLocalPlayerSubsystem::Get(this);
     Subsystem.AddMappingContext(Context,0, FModifyContextOptions());
     bShowMouseCursor = true;
-    EMouseCursor DefaultMouseCursor = EMouseCursor::Default;  
+    EMouseCursor MyDefaultMouseCursor = EMouseCursor::Default;  
 
     //setup input action    
     InputComponent.BindAction(MoveAction, ETriggerEvent::Triggered, FEnhancedInputActionHandlerDynamicSignature(this,n"Move"));

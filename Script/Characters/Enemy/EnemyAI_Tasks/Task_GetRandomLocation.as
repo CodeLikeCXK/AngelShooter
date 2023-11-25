@@ -1,4 +1,5 @@
-class Task_GetRandomLocation: UBTTask_BlueprintBase
+UCLASS()
+class UTask_GetRandomLocation: UBTTask_BlueprintBase
 {
     default NodeName = "UTask_GetRandomLocation_CPP";
 

@@ -3,40 +3,43 @@ class AAngelEnemyControllerBaseBT : AAIController
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBehaviorTree BehaviorTree;
 
-    UPROPERTY(DefaultComponent,EditAnywhere)
-    UPawnSensingComponent PawnSensingComp;
-
-    UPROPERTY(DefaultComponent,EditAnywhere)
+    UPROPERTY(DefaultComponent)
     UAIPerceptionComponent PerceptionComp;
+
+    UPROPERTY()
+    UAISenseConfig_Sight AISenseConfigSight;
+    UAISenseConfig_Hearing AISenseConfigHearing;
+
+    default AISenseConfigSight = AddSightConfig();
+    default AISenseConfigHearing = AddHearingConfig();
+    default AISenseConfigSight.DetectionByAffiliation.bDetectEnemies = true;
+    default PerceptionComp.ConfigureSense(AISenseConfigSight);
+    default PerceptionComp.ConfigureSense(AISenseConfigHearing);
+    default PerceptionComp.SetDominantSense(UAISenseConfig_Sight::StaticClass());
+
+    
+    // default AddSightConfig();
+
 
     UPROPERTY(EditDefaultsOnly)
 	FName TargetKey = n"SensedPawn";
-
-    
-	//UAISenseConfig_Sight AIsightConfig;
-    //default AIsightConfig.AddToRoot();
-    //default PerceptionComp.SensesConfig.Add(AIsightConfig);
-
-     
-
-
-    
+    UFUNCTION(BlueprintOverride)
+    void ConstructionScript()
+    {
+        
+    }
 
     UFUNCTION(BlueprintOverride)
     void BeginPlay()
     {
         RunBehaviorTree(BehaviorTree);
-        PawnSensingComp.OnSeePawn.AddUFunction(this,n"OnSeePawn");
-        PawnSensingComp.OnHearNoise.AddUFunction(this,n"OnHearNoise");
-
-
         
     }
 
     UFUNCTION()
     void OnSeePawn(APawn PlayerPawn)
     {
-        AAngelPlayerCharacterBaseLegacy Player = Cast<AAngelPlayerCharacterBaseLegacy>(PlayerPawn);
+        AAngelPlayerCharacterBase Player = Cast<AAngelPlayerCharacterBase>(PlayerPawn);
         if(Player != nullptr)
         {
             SetCanSeePawn(true, Player);
